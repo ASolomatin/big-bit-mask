@@ -1,5 +1,5 @@
 {
-    "name": "@asolomatin/big-bit-mask",
+    "name": "big-bit-mask",
     "version": "1.0.1",
     "description": "Big bit mask, wich suports more than 32 or 64 bits",
     "author": "Aleksej Solomatin",
