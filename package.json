@@ -1,0 +1,59 @@
+{
+    "name": "big-bit-mask",
+    "version": "1.0.0",
+    "description": "Big bit mask, wich suports more than 32 or 64 bits",
+    "author": "Aleksej Solomatin",
+    "homepage": "https://github.com/ASolomatin/big-bit-mask",
+    "repository": "ASolomatin/big-bit-mask",
+    "maintainers": [
+        {
+            "name": "Aleksej Solomatin <a@solomatin.in.ua> (https://github.com/ASolomatin)",
+            "email": "a@solomatin.in.ua",
+            "github-username": "ASolomatin"
+        }
+    ],
+    "keywords": [
+        "bitmask"
+    ],
+    "license": "MIT",
+    "private": false,
+    "main": "dist/big-bit-mask.es6.js",
+    "module": "dist/big-bit-mask.esm.mjs",
+    "browser": "dist/big-bit-mask.es5.js",
+    "types": "dist/big-bit-mask.d.ts",
+    "scripts": {
+        "type-check": "tsc --noEmit",
+        "type-check:watch": "npm run type-check -- --watch",
+        "build": "npm run lint && npm run build:js",
+        "build:js": "rollup -c rollup.config.js",
+        "lint": "tslint --project tsconfig.json --config tslint.json",
+        "lint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
+        "test": "mocha --exit -r ts-node/register -r tsconfig-paths/register -c \"src/**/*.ts\"",
+        "cover": "nyc -x \"test_helper_classes/**/*\" -x \"src/**/*.spec.ts\" -x \"src/**/index.ts\" npm test"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint"
+        }
+    },
+    "devDependencies": {
+        "@rollup/plugin-buble": "^0.21.3",
+        "@rollup/plugin-node-resolve": "^7.1.3",
+        "@types/chai": "^4.2.11",
+        "@types/chai-as-promised": "^7.1.2",
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^14.0.4",
+        "@wessberg/rollup-plugin-ts": "^1.2.24",
+        "chai": "^4.2.0",
+        "husky": "^3.1.0",
+        "mocha": "^7.1.2",
+        "nyc": "^15.0.1",
+        "rollup": "^2.10.3",
+        "terser": "^4.7.0",
+        "ts-node": "^8.10.1",
+        "tsconfig-paths": "^3.9.0",
+        "tslint": "^5.20.1",
+        "tslint-microsoft-contrib": "^6.2.0",
+        "typescript": "^3.9.2"
+    }
+}
