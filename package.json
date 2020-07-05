@@ -1,6 +1,6 @@
 {
     "name": "big-bit-mask",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Big bit mask, wich suports more than 32 or 64 bits",
     "author": "Aleksej Solomatin",
     "homepage": "https://github.com/ASolomatin/big-bit-mask",
@@ -29,7 +29,8 @@
         "lint": "tslint --project tsconfig.json --config tslint.json",
         "lint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
         "test": "mocha --exit -r ts-node/register -r tsconfig-paths/register -c \"src/**/*.ts\"",
-        "cover": "nyc -x \"test_helper_classes/**/*\" -x \"src/**/*.spec.ts\" -x \"src/**/index.ts\" npm test"
+        "cover": "nyc -x \"test_helper_classes/**/*\" -x \"src/**/*.spec.ts\" -x \"src/**/index.ts\" npm test",
+        "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
     },
     "husky": {
         "hooks": {
@@ -45,15 +46,16 @@
         "@types/node": "^14.0.4",
         "@wessberg/rollup-plugin-ts": "^1.2.24",
         "chai": "^4.2.0",
+        "coveralls": "^3.1.0",
         "husky": "^3.1.0",
         "mocha": "^7.1.2",
         "nyc": "^15.0.1",
-        "rollup": "^2.10.3",
+        "rollup": "^2.18.2",
         "terser": "^4.7.0",
         "ts-node": "^8.10.1",
         "tsconfig-paths": "^3.9.0",
         "tslint": "^5.20.1",
         "tslint-microsoft-contrib": "^6.2.0",
-        "typescript": "^3.9.2"
+        "typescript": "^3.9.6"
     }
 }
