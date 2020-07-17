@@ -26,6 +26,10 @@ export class BigBitMask {
         }
     }
 
+    public get bitCapacity(): number {
+        return this.blocks.length * 6;
+    }
+
     public get(bit: number): boolean {
         if (typeof (bit) !== "number") {
             throw new Error("Argument exception: bit must be a number");
