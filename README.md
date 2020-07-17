@@ -1,5 +1,5 @@
 [npm-icon]:             https://img.shields.io/npm/v/big-bit-mask.svg
-[npm-downloads-icon]:   https://img.shields.io/npm/dm/big-bit-mask.svg
+[npm-downloads-icon]:   https://img.shields.io/npm/dt/big-bit-mask.svg
 [npm-url]:              https://www.npmjs.com/package/big-bit-mask
 
 [test-icon]:            https://travis-ci.com/ASolomatin/big-bit-mask.svg?branch=master
@@ -28,6 +28,12 @@
 When bits is not enough ...
 
 This library implements a bitmask serializable into a base64-like, url-safe string.
+
+## Other platform compatibility
+
+| Platform | Repository | Package |
+|-|-|-|
+| .NET | [BigBitMask.NET](https://github.com/ASolomatin/BigBitMask.NET) | [NuGet](https://www.nuget.org/packages/BigBitMask.NET/) |
 
 ## Install
 ```
