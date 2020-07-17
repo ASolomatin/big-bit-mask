@@ -23,7 +23,12 @@ export class BigBitMask {
                 }
                 return BigBitMask.reverse[block];
             });
+            this.trimZeros();
         }
+    }
+
+    public get bitCapacity(): number {
+        return this.blocks.length * 6;
     }
 
     public get(bit: number): boolean {
@@ -48,22 +53,42 @@ export class BigBitMask {
         }
 
         const block = Math.floor(bit / 6);
+
+        if (!newValue && this.blocks.length <= block) {
+            return false;
+        }
+
         bit %= 6;
 
-        if (this.blocks.length <= block) {
-            for (let i = this.blocks.length; i <= block; i++) {
-                this.blocks[i] = 0;
-            }
+        for (let i = this.blocks.length; i <= block; i++) {
+            this.blocks[i] = 0;
         }
 
         const currentBlock = this.blocks[block];
         const currentValue = !!(currentBlock >> bit && 0x1);
         this.blocks[block] = newValue ? currentBlock | 0x1 << bit : currentBlock & ~(0x1 << bit);
 
+        if (!newValue && this.blocks.length - 1 === block) {
+            this.trimZeros();
+        }
+
         return currentValue;
     }
 
     public toString(): string {
-        return this.blocks.map((block) => BigBitMask.alpha[block]).join("").replace(/A+$/, "");
+        return this.blocks.map((block) => BigBitMask.alpha[block]).join("");
+    }
+
+    private trimZeros(): void {
+        let i;
+        for (i = this.blocks.length - 1; i >= 0; i--) {
+            if (this.blocks[i] !== 0) {
+                break;
+            }
+        }
+        const clear = this.blocks.length - (++i);
+        if (clear > 0) {
+            this.blocks.splice(i, clear);
+        }
     }
 }

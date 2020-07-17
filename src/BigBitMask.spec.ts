@@ -62,4 +62,15 @@ describe("BigBitMask tests", () => {
         bitmask.set(1000, false);
         expect(bitmask.toString()).equals("CE");
     });
+
+    it("bitCapacity", async () => {
+        const bitmask = new BigBitMask("CE");
+        expect(bitmask.bitCapacity).equals(12);
+
+        bitmask.set(1000, true);
+        expect(bitmask.bitCapacity).equals(1002);
+
+        bitmask.set(2000, false);
+        expect(bitmask.bitCapacity).equals(1002);
+    });
 });
