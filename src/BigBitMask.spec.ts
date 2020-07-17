@@ -69,5 +69,8 @@ describe("BigBitMask tests", () => {
 
         bitmask.set(1000, true);
         expect(bitmask.bitCapacity).equals(1002);
+
+        bitmask.set(2000, false);
+        expect(bitmask.bitCapacity).equals(1002);
     });
 });
