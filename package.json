@@ -1,7 +1,7 @@
 {
     "name": "big-bit-mask",
-    "version": "1.0.5",
-    "description": "Big bit mask, wich suports more than 32 or 64 bits",
+    "version": "1.0.6",
+    "description": "The infinite bitmask serializable into a base64-like, url-safe string.",
     "author": "Aleksej Solomatin",
     "homepage": "https://github.com/ASolomatin/big-bit-mask",
     "repository": "ASolomatin/big-bit-mask",
