@@ -33,6 +33,7 @@ This library implements a bitmask serializable into a base64-like, url-safe stri
 
 | Platform | Repository | Package |
 |-|-|-|
+| PHP | [php-big-bit-mask](https://github.com/ASolomatin/php-big-bit-mask) | [Packagist](https://packagist.org/packages/asolomatin/php-big-bit-mask) |
 | .NET | [BigBitMask.NET](https://github.com/ASolomatin/BigBitMask.NET) | [NuGet](https://www.nuget.org/packages/BigBitMask.NET/) |
 
 ## Install
