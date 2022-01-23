@@ -42,7 +42,7 @@ export class BigBitMask {
             if (!(masks[i] instanceof BigBitMask)) {
                 throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
             }
-            copy.orAssign(masks[i]);
+            copy.or(masks[i]);
         }
         return copy;
     }
@@ -78,7 +78,7 @@ export class BigBitMask {
                 throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
             }
             if (!copy.isEmpty) {
-                copy.andAssign(masks[i]);
+                copy.and(masks[i]);
             }
         }
         return copy;
@@ -114,7 +114,7 @@ export class BigBitMask {
             if (!(masks[i] instanceof BigBitMask)) {
                 throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
             }
-            copy.xorAssign(masks[i]);
+            copy.xor(masks[i]);
         }
         return copy;
     }
@@ -190,20 +190,20 @@ export class BigBitMask {
         return currentValue;
     }
 
-    public orAssign(otherMask: this): void {
+    public or(otherMask: this): void {
         for (let i = otherMask.blocks.length - 1; i >= 0; i--) {
             this.blocks[i] = (this.blocks[i] || 0) | otherMask.blocks[i];
         }
     }
 
-    public andAssign(otherMask: this): void {
+    public and(otherMask: this): void {
         for (let i = this.blocks.length - 1; i >= 0; i--) {
             this.blocks[i] &= otherMask.blocks[i] || 0;
         }
         this.trimZeros();
     }
 
-    public xorAssign(otherMask: this): void {
+    public xor(otherMask: this): void {
         for (let i = otherMask.blocks.length - 1; i >= 0; i--) {
             this.blocks[i] = (this.blocks[i] || 0) ^ otherMask.blocks[i];
         }
