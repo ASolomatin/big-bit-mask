@@ -178,11 +178,69 @@ class MyCoolCheckboxes extends BigBitMask {
 ```
 ----------------------------------------
 
+## Useful properties and methods
+
+### `isEmpty`
+
+Returns: `boolean`
+
+Indicates that the BigBitMask instance has none of its flags set to true.
+
+### `equals(otherMask)`
+
+Returns: `boolean`
+
+Compares the current BigBitMask instance to another.
+
+### `orAssign(otherMask)`
+
+Returns: `void`
+
+Assigns to the current instance the result of a bitwise *OR* operation between the current BigBitMask instance and another.
+
+### `andAssign(otherMask)`
+
+Returns: `void`
+
+Assigns to the current instance the result of a bitwise *AND* operation between the current BigBitMask instance and another.
+
+### `xorAssign(otherMask)`
+
+Returns: `void`
+
+Assigns to the current instance the result of a bitwise *XOR* operation between the current BigBitMask instance and another.
+
+### `BigBitMask.EQUALS(maskA, maskB)`
+
+Returns: `boolean`
+
+Compares two BigBitMask instances.
+
+### `BigBitMask.OR(arg, ...)`
+
+Returns: new instance of `BigBitMask`
+
+Applies a bitwise *OR* operation between BigBitMask instances and returns the result as a new BigBitMask instance. The arguments are expected to be BigBitMask instances or a single non-empty BigBitMask array.
+
+### `BigBitMask.AND(arg, ...)`
+
+Returns: new instance of `BigBitMask`
+
+Applies a bitwise *AND* operation between BigBitMask instances and returns the result as a new BigBitMask instance. The arguments are expected to be BigBitMask instances or a single non-empty BigBitMask array.
+
+### `BigBitMask.XOR(arg, ...)`
+
+Returns: new instance of `BigBitMask`
+
+Applies a bitwise *XOR* operation between BigBitMask instances and returns the result as a new BigBitMask instance. The arguments are expected to be BigBitMask instances or a single non-empty BigBitMask array.
+
+----------------------------------------
+
 ## License
 
 **[MIT][license-url]**
 
-Copyright (C) 2020 Aleksej Solomatin
+Copyright (C) 2020-2022 Aleksej Solomatin
 
 
 
