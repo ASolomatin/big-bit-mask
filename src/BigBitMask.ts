@@ -1,5 +1,83 @@
 export class BigBitMask {
 
+    public get bitCapacity(): number {
+        return this.blocks.length * 6;
+    }
+
+    public get isEmpty(): boolean {
+        return this.blocks.length === 0;
+    }
+
+    public static OR<T extends BigBitMask>(a: T, b: T): T {
+        const raw = Object.create(a);
+        raw.blocks = [...a.blocks];
+        const copy = raw as T;
+        copy.orAssign(b);
+        return copy;
+    }
+
+    public static AND<T extends BigBitMask>(a: T, b: T): T {
+        const raw = Object.create(a);
+        raw.blocks = [...a.blocks];
+        const copy = raw as T;
+        copy.andAssign(b);
+        return copy;
+    }
+
+    public static XOR<T extends BigBitMask>(a: T, b: T): T {
+        const raw = Object.create(a);
+        raw.blocks = [...a.blocks];
+        const copy = raw as T;
+        copy.xorAssign(b);
+        return copy;
+    }
+
+    public static EQUALS<T extends BigBitMask>(a: T, b: T): boolean {
+        return a.equals(b);
+    }
+
+    public static OR_ANY<T extends BigBitMask>(masks: T[]): T | undefined {
+        if (masks.length === 0) {
+            return undefined;
+        }
+
+        const raw = Object.create(masks[0]);
+        raw.blocks = [...masks[0].blocks];
+        const copy = raw as T;
+        for (let i = 1; i < masks.length && !copy.isEmpty; i++) {
+            copy.orAssign(masks[i]);
+        }
+        return copy;
+    }
+
+    public static AND_ALL<T extends BigBitMask>(masks: T[]): T | undefined {
+        if (masks.length === 0) {
+            return undefined;
+        }
+
+        const raw = Object.create(masks[0]);
+        raw.blocks = [...masks[0].blocks];
+        const copy = raw as T;
+        for (let i = 1; i < masks.length && !copy.isEmpty; i++) {
+            copy.andAssign(masks[i]);
+        }
+        return copy;
+    }
+
+    public static XOR_ALL<T extends BigBitMask>(masks: T[]): T | undefined {
+        if (masks.length === 0) {
+            return undefined;
+        }
+
+        const raw = Object.create(masks[0]);
+        raw.blocks = [...masks[0].blocks];
+        const copy = raw as T;
+        for (let i = 1; i < masks.length && !copy.isEmpty; i++) {
+            copy.xorAssign(masks[i]);
+        }
+        return copy;
+    }
+
     private static readonly alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
     private static readonly reverse: { [key: string]: number } = {
@@ -25,10 +103,6 @@ export class BigBitMask {
             });
             this.trimZeros();
         }
-    }
-
-    public get bitCapacity(): number {
-        return this.blocks.length * 6;
     }
 
     public get(bit: number): boolean {
@@ -73,6 +147,40 @@ export class BigBitMask {
         }
 
         return currentValue;
+    }
+
+    public orAssign(otherMask: this): void {
+        for (let i = otherMask.blocks.length - 1; i >= 0; i--) {
+            this.blocks[i] = (this.blocks[i] || 0) | otherMask.blocks[i];
+        }
+    }
+
+    public andAssign(otherMask: this): void {
+        for (let i = this.blocks.length - 1; i >= 0; i--) {
+            this.blocks[i] &= otherMask.blocks[i] || 0;
+        }
+        this.trimZeros();
+    }
+
+    public xorAssign(otherMask: this): void {
+        for (let i = otherMask.blocks.length - 1; i >= 0; i--) {
+            this.blocks[i] = (this.blocks[i] || 0) ^ otherMask.blocks[i];
+        }
+        this.trimZeros();
+    }
+
+    public equals(otherMask: this): boolean {
+        if (otherMask.blocks.length !== this.blocks.length) {
+            return false;
+        }
+
+        for (let i = otherMask.blocks.length - 1; i >= 0; i--) {
+            if (this.blocks[i] !== otherMask.blocks[i]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public toString(): string {
