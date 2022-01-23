@@ -192,19 +192,19 @@ Returns: `boolean`
 
 Compares the current BigBitMask instance to another.
 
-### `orAssign(otherMask)`
+### `or(otherMask)`
 
 Returns: `void`
 
 Assigns to the current instance the result of a bitwise *OR* operation between the current BigBitMask instance and another.
 
-### `andAssign(otherMask)`
+### `and(otherMask)`
 
 Returns: `void`
 
 Assigns to the current instance the result of a bitwise *AND* operation between the current BigBitMask instance and another.
 
-### `xorAssign(otherMask)`
+### `xor(otherMask)`
 
 Returns: `void`
 
