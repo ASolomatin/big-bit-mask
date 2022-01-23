@@ -117,10 +117,7 @@ describe("BigBitMask tests", () => {
     });
 
     it("bitwiseOperations", async () => {
-        const masks = [];
-        masks.push(new TestModel());
-        masks.push(new TestModel());
-        masks.push(new TestModel());
+        const masks = [new TestModel(), new TestModel(), new TestModel()];
 
         const refMasks = [];
         refMasks.push(new TestModel());
@@ -135,12 +132,9 @@ describe("BigBitMask tests", () => {
         im(refMasks[1], [true, false, true, false, true, false, true, false, true, false]);
         im(refMasks[2], [true, true, false, false, true, false, true, true, false, false]);
 
-        const or = TestModel.OR_ANY(masks);
-        const and = TestModel.AND_ALL(masks);
-        const xor = TestModel.XOR_ALL(masks);
-        const undef1 = TestModel.OR_ANY([]);
-        const undef2 = TestModel.AND_ALL([]);
-        const undef3 = TestModel.XOR_ALL([]);
+        const or = TestModel.OR(...masks);
+        const and = TestModel.AND(...masks);
+        const xor = TestModel.XOR(...masks);
 
         const orExpected = new TestModel();
         const andExpected = new TestModel();
@@ -153,9 +147,6 @@ describe("BigBitMask tests", () => {
         expect(or, "Expected not undefined result").not.to.be.undefined;
         expect(and, "Expected not undefined result").not.to.be.undefined;
         expect(xor, "Expected not undefined result").not.to.be.undefined;
-        expect(undef1, "Expected undefined result").to.be.undefined;
-        expect(undef2, "Expected undefined result").to.be.undefined;
-        expect(undef3, "Expected undefined result").to.be.undefined;
 
         expect(TestModel.EQUALS(refMasks[0], masks[0]), "Masks not equals").to.be.true;
         expect(TestModel.EQUALS(refMasks[1], masks[1]), "Masks not equals").to.be.true;
@@ -180,9 +171,9 @@ describe("BigBitMask tests", () => {
         masks.reverse();
         refMasks.reverse();
 
-        const or3 = TestModel.OR_ANY(masks);
-        const and3 = TestModel.AND_ALL(masks);
-        const xor3 = TestModel.XOR_ALL(masks);
+        const or3 = TestModel.OR(masks);
+        const and3 = TestModel.AND(masks);
+        const xor3 = TestModel.XOR(masks);
 
         expect(or3, "Expected not undefined result").not.to.be.undefined;
         expect(and3, "Expected not undefined result").not.to.be.undefined;
@@ -195,6 +186,32 @@ describe("BigBitMask tests", () => {
         expect(TestModel.EQUALS(or3!, orExpected), "Masks not equals").to.be.true;
         expect(TestModel.EQUALS(and3!, andExpected), "Masks not equals").to.be.true;
         expect(TestModel.EQUALS(xor3!, xorExpected), "Masks not equals").to.be.true;
+
+        const emptyModel = new TestModel();
+        const andEmpty = TestModel.AND(masks[0], emptyModel, masks[1], masks[2]);
+        expect(andEmpty.isEmpty, "Mask expected to be empty").to.be.true;
+    });
+
+    it("bitwiseOperationsEdgeCases", async () => {
+        expect(TestModel.OR(), "Expected undefined result").to.be.undefined;
+        expect(TestModel.AND(), "Expected undefined result").to.be.undefined;
+        expect(TestModel.XOR(), "Expected undefined result").to.be.undefined;
+        expect(TestModel.OR(...[]), "Expected undefined result").to.be.undefined;
+        expect(TestModel.AND(...[]), "Expected undefined result").to.be.undefined;
+        expect(TestModel.XOR(...[]), "Expected undefined result").to.be.undefined;
+        expect(TestModel.OR([]), "Expected undefined result").to.be.undefined;
+        expect(TestModel.AND([]), "Expected undefined result").to.be.undefined;
+        expect(TestModel.XOR([]), "Expected undefined result").to.be.undefined;
+
+        const model = new TestModel();
+        const badTypeModel: TestModel = 42 as any;
+
+        should().throw(() => TestModel.OR(model, badTypeModel), TypeError);
+        should().throw(() => TestModel.AND(model, badTypeModel), TypeError);
+        should().throw(() => TestModel.XOR(model, badTypeModel), TypeError);
+        should().throw(() => TestModel.OR(badTypeModel, model), TypeError);
+        should().throw(() => TestModel.AND(badTypeModel, model), TypeError);
+        should().throw(() => TestModel.XOR(badTypeModel, model), TypeError);
     });
 });
 

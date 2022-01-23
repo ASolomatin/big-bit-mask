@@ -8,71 +8,112 @@ export class BigBitMask {
         return this.blocks.length === 0;
     }
 
-    public static OR<T extends BigBitMask>(a: T, b: T): T {
-        const raw = Object.create(a);
-        raw.blocks = [...a.blocks];
-        const copy = raw as T;
-        copy.orAssign(b);
-        return copy;
-    }
-
-    public static AND<T extends BigBitMask>(a: T, b: T): T {
-        const raw = Object.create(a);
-        raw.blocks = [...a.blocks];
-        const copy = raw as T;
-        copy.andAssign(b);
-        return copy;
-    }
-
-    public static XOR<T extends BigBitMask>(a: T, b: T): T {
-        const raw = Object.create(a);
-        raw.blocks = [...a.blocks];
-        const copy = raw as T;
-        copy.xorAssign(b);
-        return copy;
-    }
-
     public static EQUALS<T extends BigBitMask>(a: T, b: T): boolean {
         return a.equals(b);
     }
 
-    public static OR_ANY<T extends BigBitMask>(masks: T[]): T | undefined {
-        if (masks.length === 0) {
+    public static OR<T extends BigBitMask>(a: T, b: T): T;
+    public static OR<T extends BigBitMask>(masks: NonEmptyArgs<T>): T;
+    public static OR<T extends BigBitMask>(...masks: NonEmptyArgs<T>): T;
+    public static OR<T extends BigBitMask>(masks: T[]): T | undefined;
+    public static OR<T extends BigBitMask>(...masks: T[]): T | undefined;
+    public static OR<T extends BigBitMask>(arg: T | T[]): T | undefined {
+        if (arguments.length === 0) {
             return undefined;
+        }
+
+        let masks: T[] | IArguments<T> = arguments;
+
+        if (arguments.length === 1 && Array.isArray(arg)) {
+            masks = arg;
+            if (masks.length === 0) {
+                return undefined;
+            }
+        }
+
+        if (!(masks[0] instanceof BigBitMask)) {
+            throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
         }
 
         const raw = Object.create(masks[0]);
         raw.blocks = [...masks[0].blocks];
         const copy = raw as T;
-        for (let i = 1; i < masks.length && !copy.isEmpty; i++) {
+        for (let i = 1; i < masks.length; i++) {
+            if (!(masks[i] instanceof BigBitMask)) {
+                throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
+            }
             copy.orAssign(masks[i]);
         }
         return copy;
     }
 
-    public static AND_ALL<T extends BigBitMask>(masks: T[]): T | undefined {
-        if (masks.length === 0) {
+    public static AND<T extends BigBitMask>(a: T, b: T): T;
+    public static AND<T extends BigBitMask>(masks: NonEmptyArgs<T>): T;
+    public static AND<T extends BigBitMask>(...masks: NonEmptyArgs<T>): T;
+    public static AND<T extends BigBitMask>(masks: T[]): T | undefined;
+    public static AND<T extends BigBitMask>(...masks: T[]): T | undefined;
+    public static AND<T extends BigBitMask>(arg: T | T[]): T | undefined {
+        if (arguments.length === 0) {
             return undefined;
+        }
+
+        let masks: T[] | IArguments<T> = arguments;
+
+        if (arguments.length === 1 && Array.isArray(arg)) {
+            masks = arg;
+            if (masks.length === 0) {
+                return undefined;
+            }
+        }
+
+        if (!(masks[0] instanceof BigBitMask)) {
+            throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
         }
 
         const raw = Object.create(masks[0]);
         raw.blocks = [...masks[0].blocks];
         const copy = raw as T;
-        for (let i = 1; i < masks.length && !copy.isEmpty; i++) {
-            copy.andAssign(masks[i]);
+        for (let i = 1; i < masks.length; i++) {
+            if (!(masks[i] instanceof BigBitMask)) {
+                throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
+            }
+            if (!copy.isEmpty) {
+                copy.andAssign(masks[i]);
+            }
         }
         return copy;
     }
 
-    public static XOR_ALL<T extends BigBitMask>(masks: T[]): T | undefined {
-        if (masks.length === 0) {
+    public static XOR<T extends BigBitMask>(a: T, b: T): T;
+    public static XOR<T extends BigBitMask>(masks: NonEmptyArgs<T>): T;
+    public static XOR<T extends BigBitMask>(...masks: NonEmptyArgs<T>): T;
+    public static XOR<T extends BigBitMask>(masks: T[]): T | undefined;
+    public static XOR<T extends BigBitMask>(...masks: T[]): T | undefined;
+    public static XOR<T extends BigBitMask>(arg: T | T[]): T | undefined {
+        if (arguments.length === 0) {
             return undefined;
+        }
+
+        let masks: T[] | IArguments<T> = arguments;
+
+        if (arguments.length === 1 && Array.isArray(arg)) {
+            masks = arg;
+            if (masks.length === 0) {
+                return undefined;
+            }
+        }
+
+        if (!(masks[0] instanceof BigBitMask)) {
+            throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
         }
 
         const raw = Object.create(masks[0]);
         raw.blocks = [...masks[0].blocks];
         const copy = raw as T;
-        for (let i = 1; i < masks.length && !copy.isEmpty; i++) {
+        for (let i = 1; i < masks.length; i++) {
+            if (!(masks[i] instanceof BigBitMask)) {
+                throw new TypeError("Arguments must be BigBitMask instances or a single non-empty BigBitMask array.");
+            }
             copy.xorAssign(masks[i]);
         }
         return copy;
@@ -200,3 +241,11 @@ export class BigBitMask {
         }
     }
 }
+
+interface IArguments<T> {
+    [index: number]: T;
+    length: number;
+    [Symbol.iterator](): IterableIterator<T>;
+}
+
+type NonEmptyArgs<T> = T[] & { 0: T };
