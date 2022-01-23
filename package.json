@@ -1,6 +1,6 @@
 {
     "name": "big-bit-mask",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "The infinite bitmask serializable into a base64-like, url-safe string.",
     "author": "Aleksej Solomatin",
     "homepage": "https://github.com/ASolomatin/big-bit-mask",
