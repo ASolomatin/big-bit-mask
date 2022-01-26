@@ -1,6 +1,6 @@
 {
     "name": "big-bit-mask",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "The infinite bitmask serializable into a base64-like, url-safe string.",
     "author": "Aleksej Solomatin",
     "homepage": "https://github.com/ASolomatin/big-bit-mask",
@@ -30,7 +30,7 @@
         "lint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
         "test": "mocha --exit -r ts-node/register -r tsconfig-paths/register -c \"src/**/*.ts\"",
         "cover": "nyc -x \"test_helper_classes/**/*\" -x \"src/**/*.spec.ts\" -x \"src/**/index.ts\" npm test",
-        "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
+        "coveralls": "npm run cover && nyc report --reporter=text-lcov > .nyc_output/lcov.info"
     },
     "husky": {
         "hooks": {
@@ -46,7 +46,6 @@
         "@types/node": "^14.18.9",
         "@wessberg/rollup-plugin-ts": "^2.0.4",
         "chai": "^4.3.4",
-        "coveralls": "^3.1.1",
         "husky": "^3.1.0",
         "mocha": "^9.1.4",
         "nyc": "^15.0.1",

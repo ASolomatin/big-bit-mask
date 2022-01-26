@@ -2,14 +2,14 @@
 [npm-downloads-icon]:   https://img.shields.io/npm/dt/big-bit-mask.svg
 [npm-url]:              https://www.npmjs.com/package/big-bit-mask
 
-[test-icon]:            https://travis-ci.com/ASolomatin/big-bit-mask.svg?branch=master
-[test-url]:             https://travis-ci.com/github/ASolomatin/big-bit-mask
+[test-icon]:            https://github.com/ASolomatin/big-bit-mask/actions/workflows/npm-test.yml/badge.svg?branch=master
+[test-url]:             https://github.com/ASolomatin/big-bit-mask/actions/workflows/npm-test.yml
 
 [coverage-icon]:        https://coveralls.io/repos/github/ASolomatin/big-bit-mask/badge.svg?branch=master
 [coverage-url]:         https://coveralls.io/github/ASolomatin/big-bit-mask?branch=master
 
-[packaging-icon]:       https://github.com/ASolomatin/big-bit-mask/workflows/Node.js%20Package/badge.svg
-[packaging-url]:        https://github.com/ASolomatin/big-bit-mask/actions?query=workflow%3A%22Node.js+Package%22
+[packaging-icon]:       https://github.com/ASolomatin/big-bit-mask/actions/workflows/npm-build.yml/badge.svg?branch=master
+[packaging-url]:        https://github.com/ASolomatin/big-bit-mask/actions/workflows/npm-build.yml
 
 [license-icon]:         https://img.shields.io/github/license/ASolomatin/big-bit-mask
 [license-url]:          https://github.com/ASolomatin/big-bit-mask/blob/master/LICENSE
@@ -18,9 +18,9 @@
 
 [![NPM][npm-icon]][npm-url]
 [![NPM downloads][npm-downloads-icon]][npm-url]
-[![Travis-CI][test-icon]][test-url]
+[![Test status][test-icon]][test-url]
 [![Coverage Status][coverage-icon]][coverage-url]
-[![Node.js Package][packaging-icon]][packaging-url]
+[![Build status][packaging-icon]][packaging-url]
 [![GitHub][license-icon]][license-url]
 
 ----------------------------------------

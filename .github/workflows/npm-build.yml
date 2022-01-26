@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: npm install
+      run: npm install
+
+    - name: npm run lint
+      run: npm run lint
+
+    - name: npm test
+      run: npm test
+
+    - name: npm run build
+      run: npm run build
+
+    - name: npm publish
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
