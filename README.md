@@ -8,7 +8,7 @@
 [coverage-icon]:        https://coveralls.io/repos/github/ASolomatin/big-bit-mask/badge.svg?branch=master
 [coverage-url]:         https://coveralls.io/github/ASolomatin/big-bit-mask?branch=master
 
-[packaging-icon]:       https://github.com/ASolomatin/big-bit-mask/actions/workflows/npm-build.yml/badge.svg?branch=master
+[packaging-icon]:       https://github.com/ASolomatin/big-bit-mask/actions/workflows/npm-build.yml/badge.svg
 [packaging-url]:        https://github.com/ASolomatin/big-bit-mask/actions/workflows/npm-build.yml
 
 [license-icon]:         https://img.shields.io/github/license/ASolomatin/big-bit-mask
