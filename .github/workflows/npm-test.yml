@@ -21,6 +21,9 @@ jobs:
     - name: npm install
       run: npm install
 
+    - name: npm run lint
+      run: npm run lint
+
     - name: npm test
       run: npm test
 
@@ -31,3 +34,4 @@ jobs:
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./.nyc_output/lcov.info
